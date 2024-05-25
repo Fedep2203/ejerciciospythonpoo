@@ -1,0 +1,99 @@
+{
+    "__class__": "Lista",
+    "calefactores": [
+        {
+            "__class__": "CalefactorElec",
+            "__atributos__": {
+                "marca": "MarcaRTX",
+                "modelo": "ModeloXTZ",
+                "paisfab": "Argentina",
+                "preciolista": 1000.0,
+                "metodopago": "contado",
+                "cuotas": 1,
+                "promo": "si",
+                "potencia": 1000
+            }
+        },
+        {
+            "__class__": "CalefactorElec",
+            "__atributos__": {
+                "marca": "MarcaF",
+                "modelo": "ModeloU",
+                "paisfab": "Colombia",
+                "preciolista": 19000.0,
+                "metodopago": "cuotas",
+                "cuotas": 10,
+                "promo": "no",
+                "potencia": 1500.0
+            }
+        },
+        {
+            "__class__": "CalefactorElec",
+            "__atributos__": {
+                "marca": "MarcaA",
+                "modelo": "ModeloX",
+                "paisfab": "Argentina",
+                "preciolista": 15000.0,
+                "metodopago": "cuotas",
+                "cuotas": 12,
+                "promo": "no",
+                "potencia": 900.0
+            }
+        },
+        {
+            "__class__": "CalefactorGas",
+            "__atributos__": {
+                "marca": "MarcaB",
+                "modelo": "ModeloY",
+                "paisfab": "Brasil",
+                "preciolista": 20000.0,
+                "metodopago": "contado",
+                "cuotas": 1,
+                "promo": "si",
+                "matricula": "ABC125437",
+                "calorias": 2000.0
+            }
+        },
+        {
+            "__class__": "CalefactorElec",
+            "__atributos__": {
+                "marca": "MarcaE",
+                "modelo": "ModeloV",
+                "paisfab": "Uruguay",
+                "preciolista": 22000.0,
+                "metodopago": "contado",
+                "cuotas": 1,
+                "promo": "si",
+                "potencia": 2000.0
+            }
+        },
+        {
+            "__class__": "CalefactorGas",
+            "__atributos__": {
+                "marca": "MarcaC",
+                "modelo": "ModeloZ",
+                "paisfab": "Chile",
+                "preciolista": 18000.0,
+                "metodopago": "contado",
+                "cuotas": 1,
+                "promo": "si",
+                "matricula": "ABC1234567",
+                "calorias": 3500.0
+            }
+        },
+        {
+            "__class__": "CalefactorGas",
+            "__atributos__": {
+                "marca": "MarcaD",
+                "modelo": "ModeloW",
+                "paisfab": "Per\u00fa",
+                "preciolista": 16000.0,
+                "metodopago": "cuotas",
+                "cuotas": 6,
+                "promo": "no",
+                "matricula": "XYZ9876543",
+                "calorias": 3000.0
+            }
+        }
+    ]
+}

@@ -14,7 +14,7 @@ class Calefactor(ABC):
         self.__marca = marca
         self.__modelo = modelo
         self.__paisfab = paisfab
-        self.__preicolista = preciolista
+        self.__preciolista = preciolista
         self.__metodopago = metodo
         if metodo.lower() == 'contado':
             self.__cuotas = 1

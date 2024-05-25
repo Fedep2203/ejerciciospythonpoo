@@ -1,20 +1,8 @@
-class Nodo:
-    __dato: object
-    __siguiente: object
+from zope.interface import implementer
+from models.nodo import Nodo
+from interfaces.ILista import ILista
 
-    def __init__(self, dato):
-        self.__dato = dato
-        self.__siguiente = None
-    
-    def set_siguiente(self, dato):
-        self.__siguiente = dato
-    
-    def get_dato(self):
-        return self.__dato
-    
-    def get_siguiente(self):
-        return self.__siguiente
-
+@implementer(ILista)
 class Lista:
     __cabeza: Nodo
     __actual: Nodo
@@ -37,10 +25,11 @@ class Lista:
             '__class__': self.__class__.__name__,
             'calefactores': [calefactores.tojson() for calefactores in self]
         }
+        return diccionario
 
     def __next__(self):
         if self.__indice == self.__tope:
-            self.__indice = 1
+            self.__indice = 0
             self.__actual = self.__cabeza
             raise StopIteration
         else:
@@ -66,7 +55,7 @@ class Lista:
         elif 0 < pos <= self.__tope:
             anterior = None
             siguiente = None
-            i = 1
+            i = 0
             nodo = Nodo(dato)
             while aux != None and i < pos:
                 anterior= aux
@@ -76,8 +65,27 @@ class Lista:
             nodo.set_siguiente(aux)
             self.__tope += 1
         else:
+            raise IndexError('La posicion indicada se encuentra fuera de rango.')       
+    
+    def mostrar_datoesp(self, pos: int):
+        print('<------------------------------------------------------------------------------------->')
+        if 0 < pos <= self.__tope:
+            aux = self.__cabeza
+            if aux == None:
+                print('La lista se encuentra vacia')
+            else:
+                i = 0
+                while aux != None and i < pos:
+                    anterior = aux
+                    aux = aux.get_siguiente()
+                    i += 1
+                if anterior == None:
+                    print('El elemento no existe.')
+                else:
+                    print(anterior.get_dato())
+        else:
             raise IndexError('La posicion indicada se encuentra fuera de rango.')
-        
+
     def insertar_final(self, dato: object):
         aux = self.__cabeza
         if aux == None:
@@ -96,20 +104,28 @@ class Lista:
             anterior.set_siguiente(nodo)
             self.__tope += 1
     
-    def mostrar_datoesp(self, pos: int):
-        if 0 < pos <= self.__tope:
-            aux = self.__cabeza
-            if aux == None:
-                print('La lista se encuentra vacia')
-            else:
-                i = 0
-                while aux != None and i < self.__tope:
-                    anterior = aux
-                    aux = aux.get_siguiente()
-                    i += 1
-                if anterior == None:
-                    print('El elemento no existe.')
-                else:
-                    print(anterior.get_dato())
-        else:
-            raise IndexError('La posicion ingresada excede el rango de la lista.')
+    def menor_precio_gas(self):
+        from models.calefactor_gas import CalefactorGas
+        print('<------------------------------------------------------------------------------------->')
+        minprice = 999999999.9
+        dato = None
+        for calefactor in self:
+            if isinstance(calefactor, CalefactorGas):
+                if calefactor.get_preciolista() < minprice:
+                    minprice = calefactor.get_preciolista()
+                    dato = calefactor
+        print(dato)
+
+    def mostrar_modelos_elec(self, marca: str):
+        from models.calefactor_elec import CalefactorElec
+        print('<------------------------------------------------------------------------------------->')
+        for calefactor in self:
+            if isinstance(calefactor, CalefactorElec):
+                if calefactor.get_marca() == marca:
+                    print(f'Modelo: {calefactor.get_modelo()}\nPotencia: {calefactor.get_potencia()}\nPrecio de Lista: {calefactor.get_preciolista()}')
+    
+    def mostrar_datospromo(self):
+        print('<------------------------------------------------------------------------------------->')
+        for calefactor in self:
+            if calefactor.get_promocion():
+                print(f'Marca: {calefactor.get_marca()}\nModelo: {calefactor.get_modelo()}\nPais de Fabricacion: {calefactor.get_paisfab()}\nImporte de venta: ${calefactor.get_impventa()}')

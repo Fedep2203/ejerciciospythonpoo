@@ -4,8 +4,8 @@ class CalefactorElec(Calefactor):
     __potencia: float
 
     def __init__(self, marca: str, modelo: str, paisfab: str,
-                  preciolista: float, metodo: str, cuotas: int, promo: str, potencia: float):
-       super().__init__(marca, modelo, paisfab, preciolista, metodo, cuotas, promo)
+                  preciolista: float, metodopago: str, cuotas: int, promo: str, potencia: float):
+       super().__init__(marca, modelo, paisfab, preciolista, metodopago, cuotas, promo)
        self.__potencia = potencia
 
     def get_potencia(self):
@@ -13,18 +13,23 @@ class CalefactorElec(Calefactor):
 
     def get_impventa(self):
         valor_r = 0
-        if self.__metodopago.lower() == 'contado':
-            if self.__promocion:
+        if self.get_metodopago().lower() == 'contado':
+            if self.get_promocion():
                 valor_r = super().get_preciolista() - ((super().get_preciolista()*15)/100)
             else:
                 valor_r = super().get_preciolista()
-        elif self.__metodopago.lower() == 'cuotas':
+        elif self.get_metodopago().lower() == 'cuotas':
             valor_r = super().get_preciolista() + ((super().get_preciolista()*40)/100)
         if self.__potencia >= 1000:
             valor_r += super().get_preciolista()/100
         return valor_r
     
     def tojson(self):
+        promo = None
+        if super().get_promocion():
+            promo = 'si'
+        else:
+            promo = 'no'
         diccionario = {
             '__class__': self.__class__.__name__,
             '__atributos__': {
@@ -34,7 +39,7 @@ class CalefactorElec(Calefactor):
                 'preciolista': super().get_preciolista(),
                 'metodopago': super().get_metodopago(),
                 'cuotas': super().get_cuotas(),
-                'promo': super().get_promocion(),
+                'promo': promo,
                 'potencia': self.__potencia
             }
         }
